@@ -80,7 +80,7 @@ The full signture of a function:
 
 ```javascript
 function (index, args, match, formatExpr, funcDepth) {
-    return <THE-VALUE-To-USE>;
+    return <THE-VALUE-TO-USE>;
 }
 ```
 
