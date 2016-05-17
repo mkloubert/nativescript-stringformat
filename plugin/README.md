@@ -9,7 +9,7 @@ A [NativeScript](https://nativescript.org/) module for formatting strings.
 
 ## License
 
-[MIT license](https://raw.githubusercontent.com/mkloubert/nativescript-applist/master/LICENSE)
+[MIT license](https://raw.githubusercontent.com/mkloubert/nativescript-stringformat/master/LICENSE)
 
 ## Platforms
 
