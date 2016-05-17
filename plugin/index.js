@@ -87,7 +87,7 @@ exports.formatArray = formatArray;
 // format()
 function format(formatStr) {
     var args = [];
-    for (var i = 1; i < arguments.length; i++)
+    for (var i = 1; i < arguments.length; i++) {
         args.push(arguments[i]);
     }
     
