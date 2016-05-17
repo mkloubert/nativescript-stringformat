@@ -113,7 +113,7 @@ StringFormat.addFormatProvider(function(ctx) {
     }
     
     if (ctx.expression === "lower") {
-        // UPPER case
+        // LOWER case
         ctx.handled = true;
         return toStringSafe().toLowerCase();
     }
