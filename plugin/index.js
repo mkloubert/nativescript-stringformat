@@ -87,8 +87,8 @@ exports.formatArray = formatArray;
 // format()
 function format(formatStr) {
     var args = [];
-    if (arguments.length > 1) {
-        args = arguments.slice(1);
+    for (var i = 1; i < arguments.length; i++)
+        args.push(arguments[i]);
     }
     
     return formatArray(formatStr, args);
