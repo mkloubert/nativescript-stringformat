@@ -89,3 +89,55 @@ function (index, args, match, formatExpr, funcDepth) {
 | match | The complete (unhandled) expression of the argument. |
 | formatExpr | The optional format expression of the argument. For `{0:lower}` this will be `lower`.  |
 | funcDepth | This value is `0` at the beginning. If you return a function in that function again, this will increase until you stop to return a function. |
+
+### Format providers
+
+Separated by a `:` an argument can contain a format expression at the right side.
+
+So you can define custom logic to convert an argument value.
+
+Lets say we want to define a format provider that converts values to upper and lower case strings:
+
+```javascript
+var StringFormat = require("nativescript-stringformat");
+
+StringFormat.addFormatProvider(function(ctx) {    
+    var toStringSafe = function() { 
+        return ctx.value ? ctx.value.toString() : "";
+    }
+    
+    if (ctx.expression === "upper") {
+        // UPPER case
+        ctx.handled = true;
+        return toStringSafe().toUpperCase();
+    }
+    
+    if (ctx.expression === "lower") {
+        // UPPER case
+        ctx.handled = true;
+        return toStringSafe().toLowerCase();
+    }
+});
+```
+
+Now you can use the extended logix in your code:
+
+```javascript
+var StringFormat = require('nativescript-stringformat');
+
+// MARCEL kloubert
+var newStr = StringFormat.format("{0:upper} {1:lower}",
+                                 "Marcel", "KlOUBERT");
+```
+
+The `ctx` object of the provider callback has the following structure:
+
+| Name | Description |
+| ---- | --------- |
+| expression | The expression right to `:`. In that example `upper` and `lower`.  |
+| handled | Defines if value was handled or not. Is `(false)` by default. |
+| value | The value that should be parsed. In that example `Marcel` and `KlOUBERT`. |
+
+The parsed value has to be returned and `(ctx.handled)` has to be set to `(true)`.
+
+All upcoming format providers will be skipped if the value has been marked as "handled".
