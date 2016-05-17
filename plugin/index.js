@@ -17,16 +17,6 @@ function addFormatProvider(providerCallback) {
 };
 exports.addFormatProvider = addFormatProvider;
 
-// format()
-function format(formatStr) {
-    var args = [];
-    if (arguments.length > 1) {
-        args = arguments.slice(1);
-    }
-    
-    return formatArray(formatStr, args);
-};
-exports.format = format;
 
 // formatArray()
 function formatArray(formatStr, args) {
@@ -93,3 +83,14 @@ function formatArray(formatStr, args) {
     });
 };
 exports.formatArray = formatArray;
+
+// format()
+function format(formatStr) {
+    var args = [];
+    if (arguments.length > 1) {
+        args = arguments.slice(1);
+    }
+    
+    return formatArray(formatStr, args);
+};
+exports.format = format;
