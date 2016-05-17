@@ -24,7 +24,7 @@ function format(formatStr) {
         args = arguments.slice(1);
     }
     
-    return exports.formatArray(formatStr, args);
+    return formatArray(formatStr, args);
 };
 exports.format = format;
 
