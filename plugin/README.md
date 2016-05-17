@@ -122,7 +122,7 @@ StringFormat.addFormatProvider(function(ctx) {
 });
 ```
 
-Now you can use the extended logix in your code:
+Now you can use the extended logic in your code:
 
 ```javascript
 var StringFormat = require('nativescript-stringformat');
