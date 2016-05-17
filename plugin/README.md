@@ -5,6 +5,8 @@
 
 A [NativeScript](https://nativescript.org/) module for formatting strings.
 
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=B9SPFN79E8BWE)
+
 ## License
 
 [MIT license](https://raw.githubusercontent.com/mkloubert/nativescript-applist/master/LICENSE)
