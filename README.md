@@ -138,6 +138,6 @@ The `ctx` object of a provider callback has the following structure:
 | handled | Defines if value was handled or not. Is `(false)` by default. |
 | value | The value that should be parsed. In that example `Marcel` and `KlOUBERT`. |
 
-The parsed value has to be returned and `(ctx.handled)` has to be set to `(true)`.
+The parsed value has to be returned and `ctx.handled` has to be set to `(true)`.
 
 All upcoming format providers will be skipped if the value has been marked as "handled".
