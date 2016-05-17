@@ -1,6 +1,6 @@
 {
   "name": "nativescript-stringformat",
-  "description": "NativeScript module for implementing batch operations.",
+  "description": "NativeScript module for formatting strings.",
   "version": "1.0.0",
   "nativescript": {
     "platforms": {

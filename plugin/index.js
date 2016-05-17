@@ -31,21 +31,28 @@ exports.format = format;
 // formatArray()
 function formatArray(formatStr, args) {
     if (!formatStr) {
-        return;
+        return formatStr;
     }
+    
+    formatStr = "" + formatStr;
     
     if (!args) {
         args = [];
     }
     
-    return this.replace(/{(\d+)(\:)?([^}]*)}/g, function(match, index, formatSeparator, formatExpr) {
+    return formatStr.replace(/{(\d+)(\:)?([^}]*)}/g, function(match, index, formatSeparator, formatExpr) {
         var resultValue = args[index];
-        
+
         if (resultValue === undefined) {
             return match;
         }
         
-        if (formatExpr) {
+        var funcDepth = 0;
+        while (typeof resultValue === "function") {
+            resultValue = resultValue(index, args, match, formatExpr, funcDepth++);
+        }
+        
+        if (formatSeparator === ':') {
             // use format providers
             
             for (var i = 0; i < _formatProviders.length; i++) {
@@ -60,8 +67,9 @@ function formatArray(formatStr, args) {
                     value: resultValue    
                 };
                 
+                var fbResult;
                 try {
-                    fb(fbCtx);
+                    fbResult = fb(fbCtx);
                 }
                 catch (e) {
                     continue;
@@ -70,7 +78,7 @@ function formatArray(formatStr, args) {
                 if (fbCtx.handled) {
                     // handled: first wins
                     
-                    resultValue = fbCtx.value;
+                    resultValue = fbResult;
                     break;
                 }
             }
