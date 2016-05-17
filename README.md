@@ -130,7 +130,7 @@ var newStr = StringFormat.format("{0:upper} {1:lower}",
                                  "Marcel", "KlOUBERT");
 ```
 
-The `ctx` object of the provider callback has the following structure:
+The `ctx` object of a provider callback has the following structure:
 
 | Name | Description |
 | ---- | --------- |
