@@ -76,7 +76,7 @@ var newStr = StringFormat.format("{0} + {1} = {2}",
                                  });
 ```
 
-The full signture of a function:
+The full signature of a function:
 
 ```javascript
 function (index, args, match, formatExpr, funcDepth) {

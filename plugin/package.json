@@ -1,7 +1,7 @@
 {
   "name": "nativescript-stringformat",
   "description": "NativeScript module for formatting strings.",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "nativescript": {
     "platforms": {
       "android": "1.1.0",
