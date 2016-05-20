@@ -202,13 +202,27 @@ function isNullOrEmpty(str) {
 }
 exports.isNullOrEmpty = isNullOrEmpty;
 /**
- * Checks if a string is (null) or contains whitespaces only.
+ * Checks if a string is (null) or undefined.
+ *
+ * @function isNullOrUndefined
+ *
+ * @param {String} str The string to check.
+ *
+ * @return {Boolean} Is (null) / undefined or not.
+ */
+function isNullOrUndefined(str) {
+    return null === str ||
+        undefined === str;
+}
+exports.isNullOrUndefined = isNullOrUndefined;
+/**
+ * Checks if a string is (null), empty or contains whitespaces only.
  *
  * @function isNullOrWhitespace
  *
  * @param {String} str The string to check.
  *
- * @return {Boolean} Is (null) / contains whitespaces or not.
+ * @return {Boolean} Is (null) / empty / contains whitespaces or not.
  */
 function isNullOrWhitespace(str) {
     if (null === str) {
@@ -218,19 +232,17 @@ function isNullOrWhitespace(str) {
 }
 exports.isNullOrWhitespace = isNullOrWhitespace;
 /**
- * Checks if a string contains whitespaces only.
+ * Checks if a string is empty or contains whitespaces only.
  *
  * @function isWhitespace
  *
  * @param {String} str The string to check.
  *
- * @return {Boolean} Contains whitespaces only or not.
+ * @return {Boolean} Is empty / contains whitespaces only or not.
  */
 function isWhitespace(str) {
-    if (!str) {
-        return false;
-    }
-    return "" === str.trim();
+    return !isNullOrUndefined(str) &&
+        "" === str.trim();
 }
 exports.isWhitespace = isWhitespace;
 /**
