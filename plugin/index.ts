@@ -107,7 +107,7 @@ export function compare(x: string, y: string) : number {
  * 
  * @return {String} The joined string.
  */
-export function concat(separator: string, itemList: any[]) : string {
+export function concat(itemList: any[]) : string {
     return join("", itemList);
 }
 

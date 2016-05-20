@@ -82,7 +82,7 @@ exports.compare = compare;
  *
  * @return {String} The joined string.
  */
-function concat(separator, itemList) {
+function concat(itemList) {
     return join("", itemList);
 }
 exports.concat = concat;
