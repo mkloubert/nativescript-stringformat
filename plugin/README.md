@@ -143,3 +143,18 @@ The `ctx` object of a provider callback has the following structure:
 The parsed value has to be returned and `ctx.handled` has to be set to `(true)`.
 
 All upcoming format providers will be skipped if the value has been marked as "handled".
+
+### Helper functions
+
+| Name | Description |
+| ---- | --------- |
+| compare | Compares two strings. |
+| concat | Joins elements of an array to one string. |
+| isEmpty | Checks if a string is undefined, (null) or empty. |
+| isEmptyOrWhitespace | Checks if a string is undefined, (null), empty or contains whitespaces only. |
+| isNullOrEmpty | Checks if a string is (null) or empty. |
+| isNullOrUndefined | Checks if a string is (null) or undefined. |
+| isNullOrWhitespace | Checks if a string is (null), empty or contains whitespaces only. |
+| isWhitespace | Checks if a string is empty or contains whitespaces only. |
+| join | Joins elements of an array to one string by using a separator. |
+
