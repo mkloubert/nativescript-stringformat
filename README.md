@@ -36,8 +36,8 @@ Otherwise ...
 
 ### Simple example
 
-```javascript
-var StringFormat = require('nativescript-stringformat');
+```typescript
+import StringFormat = require('nativescript-stringformat');
 
 // "TM + MK"
 var newStr1 = StringFormat.format("{0} + {1}",
@@ -51,8 +51,8 @@ var newStr2 = StringFormat.formatArray("{0} + {1}",
 
 ### Custom order of arguments
 
-```javascript
-var StringFormat = require('nativescript-stringformat');
+```typescript
+import StringFormat = require('nativescript-stringformat');
 
 // "Marcel Kloubert"
 var newStr = StringFormat.format("{1} {0}",
@@ -64,8 +64,8 @@ var newStr = StringFormat.format("{1} {0}",
 
 You can use functions that return the value that should be included into the target string:
 
-```javascript
-var StringFormat = require('nativescript-stringformat');
+```typescript
+import StringFormat = require('nativescript-stringformat');
 
 // "23091979 + 5091979 = 28183958"
 var newStr = StringFormat.format("{0} + {1} = {2}",
@@ -78,7 +78,7 @@ var newStr = StringFormat.format("{0} + {1} = {2}",
 
 The full signature of a function:
 
-```javascript
+```typescript
 function (index, args, match, formatExpr, funcDepth) {
     return <THE-VALUE-TO-USE>;
 }
@@ -100,8 +100,8 @@ So you can define custom logic to convert an argument value.
 
 Lets say we want to define a format provider that converts values to upper and lower case strings:
 
-```javascript
-var StringFormat = require("nativescript-stringformat");
+```typescript
+import StringFormat = require("nativescript-stringformat");
 
 StringFormat.addFormatProvider(function(ctx) {    
     var toStringSafe = function() { 
@@ -124,8 +124,8 @@ StringFormat.addFormatProvider(function(ctx) {
 
 Now you can use the extended logic in your code:
 
-```javascript
-var StringFormat = require('nativescript-stringformat');
+```typescript
+import StringFormat = require('nativescript-stringformat');
 
 // MARCEL kloubert
 var newStr = StringFormat.format("{0:upper} {1:lower}",
