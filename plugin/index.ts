@@ -187,7 +187,7 @@ export function formatArray(formatStr: string, args: any[]) : string {
         }
 
         // not defined => return whole match string
-        return resultValue;
+        return match;
     });
 }
 

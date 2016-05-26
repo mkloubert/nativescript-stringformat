@@ -154,7 +154,7 @@ function formatArray(formatStr, args) {
             return resultValue;
         }
         // not defined => return whole match string
-        return resultValue;
+        return match;
     });
 }
 exports.formatArray = formatArray;
