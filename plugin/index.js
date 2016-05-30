@@ -76,7 +76,7 @@ function compare(x, y) {
 }
 exports.compare = compare;
 /**
- * Joins items of one string.
+ * Joins items to one string.
  *
  * @function concat
  *
@@ -247,7 +247,7 @@ function isWhitespace(str) {
 }
 exports.isWhitespace = isWhitespace;
 /**
- * Joins items of one string.
+ * Joins items to one string.
  *
  * @function join
  *

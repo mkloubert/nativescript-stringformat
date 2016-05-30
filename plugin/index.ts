@@ -99,7 +99,7 @@ export function compare(x: string, y: string) : number {
 }
 
 /**
- * Joins items of one string.
+ * Joins items to one string.
  * 
  * @function concat
  * 
@@ -279,7 +279,7 @@ export function isWhitespace(str: string) : boolean {
 }
 
 /**
- * Joins items of one string.
+ * Joins items to one string.
  * 
  * @function join
  * 

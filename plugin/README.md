@@ -32,6 +32,10 @@ For quick start have a look at the [demo/app/main-view-model.js](https://github.
 
 Otherwise ...
 
+## Documentation
+
+The full documentation can be found on [readme.io](https://nativescript-strformat.readme.io/docs).
+
 ## Examples
 
 ### Simple example
