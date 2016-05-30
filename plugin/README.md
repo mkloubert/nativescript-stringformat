@@ -157,4 +157,4 @@ All upcoming format providers will be skipped if the value has been marked as "h
 | isNullOrWhitespace | Checks if a string is (null), empty or contains whitespaces only. |
 | isWhitespace | Checks if a string is empty or contains whitespaces only. |
 | join | Joins elements of an array to one string by using a separator. |
-
+| similarity | Calculates the similarity between two strings. |

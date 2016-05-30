@@ -20,9 +20,9 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
+import TypeUtils = require("utils/types");
 
 var _formatProviders = [];
-
 
 /**
  * Describes a format provider context.
@@ -53,7 +53,7 @@ class FormatProviderContext implements IFormatProviderContext {
         this._value = val;
     }
     
-    handled: boolean;
+    handled: boolean = false;
     
     public get expression(): string {
         return this._expression;
@@ -163,7 +163,6 @@ export function formatArray(formatStr: string, args: any[]) : string {
                 var fp = _formatProviders[i];
                 
                 var fpCtx = new FormatProviderContext(formatExpr, resultValue);
-                fpCtx.handled = false;
                 
                 var fpResult;
                 try {
@@ -301,4 +300,90 @@ export function join(separator: string, itemList: any[]) : string {
     }
     
     return result;
+}
+
+/**
+ * Returns the similarity of strings.
+ * 
+ * @function similarity
+ * 
+ * @param {string} left The "left" string.
+ * @param {string} right The "right" string.
+ * @param {boolean} [ignoreCase] Compare case insensitive or not.
+ * @param {boolean} [trim] Trim both strings before comparison or not.
+ * 
+ * @return {Number} The similarity between 0 (0 %) and 1 (100 %).
+ */
+export function similarity(left : string, right : string, ignoreCase? : boolean, trim? : boolean) : number {
+    if (left === right) {
+        return 1;
+    }
+
+    if (TypeUtils.isNullOrUndefined(left) ||
+        TypeUtils.isNullOrUndefined(right)) {
+        return 0;
+    }
+
+    if (arguments.length < 4) {
+        if (arguments.length < 3) {
+            ignoreCase = false;
+        }
+        
+        trim = false;
+    }
+
+    if (ignoreCase) {
+        left = left.toLowerCase();
+        right = right.toLowerCase();
+    }
+    
+    if (trim) {
+        left = left.trim();
+        right = right.trim();
+    }
+    
+    var distance = 0;
+    
+    if (left !== right) {
+        var matrix = new Array(left.length + 1);
+        for (var i = 0; i < matrix.length; i++) {
+            matrix[i] = new Array(right.length + 1);
+            
+            for (var ii = 0; ii < matrix[i].length; ii++) {
+                matrix[i][ii] = 0;
+            } 
+        }
+        
+        for (var i = 0; i <= left.length; i++) {
+            // delete
+            matrix[i][0] = i;
+        }
+        
+        for (var j = 0; j <= right.length; j++) {
+            // insert
+            matrix[0][j] = j;
+        }
+        
+        for (var i = 0; i < left.length; i++) {
+            for (var j = 0; j < right.length; j++) {
+                if (left[i] === right[j]) {
+                    matrix[i + 1][j + 1] = matrix[i][j];
+                }
+                else {
+                    // delete or insert
+                    matrix[i + 1][j + 1] = Math.min(matrix[i][j + 1] + 1,
+                                                    matrix[i + 1][j] + 1);
+
+                    // substitution
+                    matrix[i + 1][j + 1] = Math.min(matrix[i + 1][j + 1],
+                                                    matrix[i][j] + 1);
+                }
+            }
+            
+            distance = matrix[left.length][right.length];
+        }
+    }
+    
+    return 1.0 - distance / Math.max(left.length,
+                                     right.length);
 }
