@@ -279,11 +279,11 @@ export class StringBuilder {
     }
 
     /**
-     * Prepends a value.
+     * Prepends a new line by prepending an optional value.
      * 
      * @chainable
      * 
-     * @param any value The value to prepend.
+     * @param any [value] The optional value to prepend.
      */
     public prependLine(value?: any): StringBuilder {
         return this.prepend(this._newLine)
