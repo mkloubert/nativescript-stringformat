@@ -3,7 +3,7 @@
 
 # NativeScript StringFormat
 
-A [NativeScript](https://nativescript.org/) module for formatting strings.
+A [NativeScript](https://nativescript.org/) module for handling strings.
 
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=B9SPFN79E8BWE)
 
@@ -148,7 +148,9 @@ The parsed value has to be returned and `ctx.handled` has to be set to `(true)`.
 
 All upcoming format providers will be skipped if the value has been marked as "handled".
 
-### Helper functions
+### Helper functions and classes
+
+#### Functions
 
 | Name | Description |
 | ---- | --------- |
@@ -162,3 +164,26 @@ All upcoming format providers will be skipped if the value has been marked as "h
 | isWhitespace | Checks if a string is empty or contains whitespaces only. |
 | join | Joins elements of an array to one string by using a separator. |
 | similarity | Calculates the similarity between two strings. |
+
+#### Classes
+
+##### StringBuilder
+
+```typescript
+import StringFormat = require('nativescript-stringformat');
+
+var builder = new StringFormat.StringBuilder();
+
+for (var i = 0; i < 5; i++) {
+    builder.appendFormat("Line #{1}: {0}", i, i + 1)
+           .appendLine();
+}
+
+// "Line 1: 0
+// Line 2: 1
+// Line 3: 2
+// Line 4: 3
+// Line 5: 4"
+var str = builder.toString();
+```
+

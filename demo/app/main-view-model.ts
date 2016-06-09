@@ -54,7 +54,15 @@ function createViewModel() {
         item.result = StringFormat.formatArray(item.expr,
                                                item.args);
     }
-    
+
+    var builder = new StringFormat.StringBuilder();
+    for (var i = 0; i < 5; i++) {
+        builder.appendFormat("Line #{1}: {0}", i, i + 1)
+               .appendLine();
+    }
+
+    viewModel.stringBuilderResult = '' + builder;
+
     return viewModel;
 }
 exports.createViewModel = createViewModel;

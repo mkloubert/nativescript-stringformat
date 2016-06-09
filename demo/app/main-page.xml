@@ -4,12 +4,28 @@
     </ActionBar>
   </Page.actionBar>
   
-  <ListView items="{{ items }}">
-    <ListView.itemTemplate>
-      <StackLayout>
-        <Label text="{{ description }}" />
-        <Label text="{{ result }}" />
-      </StackLayout>
-    </ListView.itemTemplate>
-  </ListView>
+  <TabView>
+   <TabView.items>
+     <TabViewItem title="format()">
+       <TabViewItem.view>
+          <ListView items="{{ items }}">
+            <ListView.itemTemplate>
+              <StackLayout>
+                <Label text="{{ description }}" />
+                <Label text="{{ result }}" />
+              </StackLayout>
+            </ListView.itemTemplate>
+          </ListView>
+       </TabViewItem.view>
+     </TabViewItem>
+
+     <TabViewItem title="StringBuilder">
+       <TabViewItem.view>
+          <Label text="{{ stringBuilderResult }}"
+                 textWrap="true" />
+       </TabViewItem.view>
+     </TabViewItem>
+   </TabView.items>
+ </TabView>
+
 </Page>

@@ -25,6 +25,11 @@ import TypeUtils = require("utils/types");
 var _formatProviders = [];
 
 /**
+ * Stores the value for a "new line".
+ */
+export var NewLine: string = "\n";
+
+/**
  * Describes a format provider context.
  */
 export interface IFormatProviderContext {
@@ -61,6 +66,332 @@ class FormatProviderContext implements IFormatProviderContext {
     
     public get value(): any {
         return this._value;
+    }
+}
+
+/**
+ * Builds a string.
+ */
+export class StringBuilder {
+    /**
+     * Stores the internal buffer.
+     */
+    protected _buffer: string;
+    /**
+     * Store the value for a "new line".
+     */
+    protected _newLine: string;
+
+    /**
+     * Initializes a new instance of that class.
+     * 
+     * @param any [initialVal] The initial value.
+     */
+    constructor(initialVal?: any) {
+        this._newLine = this.valueToString(NewLine);
+        this._buffer = this.valueToString(initialVal);
+    }
+
+    /**
+     * Appends a value.
+     * 
+     * @chainable
+     * 
+     * @param any value The value to append.
+     */
+    public append(value: any): StringBuilder {
+        this._buffer += this.valueToString(value);
+        return this;
+    }
+
+    /**
+     * Appends a formatted string.
+     * 
+     * @chainable
+     * 
+     * @param {String} formatStr The format string.
+     * @param any ...args One or more argument for the format string.
+     */
+    public appendFormat(formatStr: string, ...args: any[]): StringBuilder {
+        return this.appendFormatArray(formatStr, args);
+    }
+
+    /**
+     * Appends a formatted string.
+     * 
+     * @chainable
+     * 
+     * @param {String} formatStr The format string.
+     * @param {Array} [args] One or more argument for the format string.
+     */
+    public appendFormatArray(formatStr: string, args?: any[]): StringBuilder {
+        return this.append(formatArray(formatStr, args));
+    }
+
+    /**
+     * Appends a value and also adds a new line.
+     * 
+     * @chainable
+     * 
+     * @param any value The value to append.
+     */
+    public appendLine(value?: any): StringBuilder {
+        return this.append(value)
+                   .append(this._newLine);
+    }
+
+    /**
+     * Resets the string.
+     * 
+     * @chainable
+     */
+    public clear(): StringBuilder {
+        this._buffer = '';
+        return this;
+    }
+
+    /**
+     * Checks if another string and the string of that builder are equal.
+     * 
+     * @param any other The other string.
+     * 
+     * @return {Boolean} Are equal or not.
+     */
+    public equals(other: string | StringBuilder): boolean {
+        if (TypeUtils.isNullOrUndefined(other)) {
+            return false;
+        }
+
+        if (other instanceof StringBuilder) {
+            return other.toString() === this._buffer;
+        }
+
+        return other === this._buffer;
+    }
+
+    /**
+     * Executes a search on a string using a regular expression pattern,
+     * and returns an array containing the results of that search.
+     * 
+     * @param RegExp regEx The rehular expression to use.
+     * 
+     * @return {RegExpExecArray} The result of the search.
+     */
+    public exec(regEx: RegExp): RegExpExecArray {
+        return regEx.exec(this._buffer);
+    }
+    
+    /**
+     * Inserts a value.
+     * 
+     * @chainable
+     * 
+     * @param {Number} index The zero based index where to insert the value to.
+     * @param any value The value to insert.
+     */
+    public insert(index: number, value: any): StringBuilder {
+        this._buffer = this._buffer.substr(0, index) + 
+                       this.valueToString(value) + 
+                       this._buffer.substr(index + 1);
+
+        return this;
+    }
+
+    /**
+     * Inserts a formatted string.
+     * 
+     * @chainable
+     * 
+     * @param {Number} index The zero based index where to insert the formatted string to.
+     * @param {String} formatStr The format string.
+     * @param any ...args One or more argument for the format string.
+     */
+    public insertFormat(index: number, formatStr: string, ...args: any[]): StringBuilder {
+        return this.insertFormatArray(index,
+                                      formatStr, args);
+    }
+
+    /**
+     * Inserts a formatted string.
+     * 
+     * @chainable
+     * 
+     * @param {Number} index The zero based index where to insert the formatted string to.
+     * @param {String} formatStr The format string.
+     * @param {Array} [args] One or more argument for the format string.
+     */
+    public insertFormatArray(index: number, formatStr: string, args: any[]): StringBuilder {
+        return this.insert(index,
+                           formatArray(formatStr, args));
+    }
+
+    /**
+     * Gets the current length of the current string.
+     */
+    public get length(): number {
+        return this._buffer.length;
+    }
+
+    /**
+     * Gets or sets the value for a "new line".
+     */
+    public get newLine(): string {
+        return this._newLine;
+    }
+    public set newLine(value: string) {
+        this._newLine = this.valueToString(value);
+    }
+
+    /**
+     * Prepends a value.
+     * 
+     * @chainable
+     * 
+     * @param any value The value to prepend.
+     */
+    public prepend(value: any): StringBuilder {
+        this._buffer = this.valueToString(value) + this._buffer;
+        return this;
+    }
+
+    /**
+     * Prepends a formatted string.
+     * 
+     * @chainable
+     * 
+     * @param {String} formatStr The format string.
+     * @param any ...args One or more argument for the format string.
+     */
+    public prependFormat(formatStr: string, ...args: any[]): StringBuilder {
+        return this.prependFormatArray(formatStr, args);
+    }
+
+    /**
+     * Prepends a formatted string.
+     * 
+     * @chainable
+     * 
+     * @param {String} formatStr The format string.
+     * @param {Array} [args] One or more argument for the format string.
+     */
+    public prependFormatArray(formatStr: string, args?: any[]): StringBuilder {
+        return this.prepend(formatArray(formatStr, args));
+    }
+
+    /**
+     * Prepends a value.
+     * 
+     * @chainable
+     * 
+     * @param any value The value to prepend.
+     */
+    public prependLine(value?: any): StringBuilder {
+        return this.prepend(this._newLine)
+                   .prepend(value);
+    }
+
+    /**
+     * Removes the specified range of characters from this instance.
+     * 
+     * @chainable
+     * 
+     * @param {Number} startIndex The zero-based position where removal begins.
+     * @param {Number} [length] The number of characters to remove.
+     *                          If NOT defined: Anything behind startIndex is removed.
+     */
+    public remove(startIndex: number, length?: number): StringBuilder {
+        if (arguments.length > 1) {
+            this._buffer = this._buffer.substr(0, startIndex) + 
+                           this._buffer.substr(startIndex + length);
+        }
+        else {
+            this._buffer = this._buffer
+                               .substr(0, startIndex);
+        }
+
+        return this;
+    }
+
+    /**
+     * Replaces parts of the string.
+     * 
+     * @chainable
+     * 
+     * @param {String|RegExp} searchValue The string or the regular expression to search for.
+     * @param {String|RegExp} replacerOrValue The value or callback that replaces the matches.
+     * @param {Number} startIndex The optional start index that defines where replacements starts.
+     * @param {Number} count The optional number of chars (beginning at start index) that should be replaced.
+     */
+    public replace(searchValue: string | RegExp,
+                   replacerOrValue: string | ((substring: string, ...args: any[]) => string),
+                   startIndex?: number, count?: number): StringBuilder {
+        
+        if (TypeUtils.isNullOrUndefined(startIndex)) {
+            startIndex = 0;
+        }
+
+        if (TypeUtils.isNullOrUndefined(count)) {
+            count = this._buffer.length - startIndex;
+        }
+
+        var replacedStr = this._buffer
+                              .substr(startIndex, count)
+                              .replace(<any>searchValue, <any>replacerOrValue);
+        
+        this._buffer = this._buffer.substr(0, startIndex) + 
+                       replacedStr + 
+                       this._buffer.substr(startIndex + 1);
+        
+        return this;
+    }
+
+    /**
+     * Checks if a pattern exists in a searched string.
+     * 
+     * @param {RegExp} regEx The regular expression.
+     * 
+     * @return {Boolean} Pattern exists or not.
+     */
+    public test(regEx: RegExp): boolean {
+        return regEx.test(this._buffer);
+    }
+
+    /**
+     * Returns that string as an char array.
+     * 
+     * @return {Array} The array of chars.
+     */
+    public toCharArray(): string[] {
+        var arr: string[];
+        for (var i = 0; i < this._buffer.length; i++) {
+            arr.push(this._buffer[i]);
+        }
+
+        return arr;
+    }
+
+    /**
+     * Creates the string representation of that builder.
+     * 
+     * @return {String} The string representation.
+     */
+    public toString(): string {
+        return this._buffer;
+    }
+
+    /**
+     * Converts a value to a string.
+     * 
+     * @param any value The input value.
+     * 
+     * @return {String} The value as string.
+     */
+    protected valueToString(value?: any): string {
+        if (TypeUtils.isNullOrUndefined(value)) {
+            return '';
+        }
+
+        return '' + value;
     }
 }
 
