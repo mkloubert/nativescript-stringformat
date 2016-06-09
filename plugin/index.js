@@ -99,11 +99,11 @@ var StringBuilder = (function () {
         return this.append(formatArray(formatStr, args));
     };
     /**
-     * Appends a value and also adds a new line.
+     * Appends a new line by appending an optional value.
      *
      * @chainable
      *
-     * @param any value The value to append.
+     * @param any [value] The optional value to append.
      */
     StringBuilder.prototype.appendLine = function (value) {
         return this.append(value)

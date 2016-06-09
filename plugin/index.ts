@@ -129,11 +129,11 @@ export class StringBuilder {
     }
 
     /**
-     * Appends a value and also adds a new line.
+     * Appends a new line by appending an optional value.
      * 
      * @chainable
      * 
-     * @param any value The value to append.
+     * @param any [value] The optional value to append.
      */
     public appendLine(value?: any): StringBuilder {
         return this.append(value)
